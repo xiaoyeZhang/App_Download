@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>无锡市农业地理信息系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="./css?v=XrM_i-qL7ntkoyZchCNCLeeyZEN21k6m7X1mfUibzPs1" rel="stylesheet"/>
+
+    <script src="./jquery?v=2u0aRenDpYxArEyILB59ETSCA2cfQkSMlxb6jbMBqf81"></script>
+
+    <style>
+        .logo {
+            width: 36px;
+            height: 36px;
+        }
+
+        .download_logo {
+            width: 160px;
+            height: 160px;
+        }
+
+        .btn-u-lg, a.btn-u-lg {
+            font-size: 18px;
+            color: white;
+            padding: 8px 60px;
+            background-color: #28caad;
+            border-radius: 30px;
+        }
+
+        .mt-40 {
+            margin-top: 40px;
+        }
+
+        footer{
+            position:absolute;
+            /*text-align: center;*/
+            bottom:20px;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="container content">
+
+        <div class="view row">
+            <div class="span12" style="text-align:center;padding-top:10px;">
+                <h2 style="color:#333;margin-bottom: -5px;">
+                    无锡市农业地理信息系统
+                </h2>
+
+                <p id="text"></p>
+            </div>
+        </div>
+        <div id="" class="view row margin-bottom-30 col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="span12 gray-text" style="text-align:center;">
+                    <p style="padding-top:10px;color:#969b9d;">用手机扫描二维码安装</p>
+                </div>
+                <div class="span12 gray-text" style="text-align:center;">
+                    
+                    <img src="./QR_code_58.png" class="download_logo" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <hr class="devider devider-dotted">
+            </div>
+        </div>
+
+        <div class="view row margin-bottom-30">
+            <div class="col-md-4 col-md-offset-2" style="border-right:1px solid #e7ebed;" id="ios">
+                <div class="row text-center">
+
+                    <div class="margin-bottom-20">
+                        <img class="logo" src="./download_apple.png" />
+                    </div>
+
+                    <div class="margin-bottom-20 mt-40">
+                        <a href="javascript:void(0);" onclick="javascript:install_merge_loading('ios');" id="down_load" class="btn-u btn-u-lg " style="padding:8px 40px;">
+
+                            下载 iOS 版
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="border-left:0px solid #ccc;" id="android">
+                <div class="row text-center">
+
+                    <div class="margin-bottom-20">
+                        <img class="logo" src="./download_android.png" />
+                    </div>
+
+                    <div class="margin-bottom-20 mt-40">
+                        <a href="javascript:void(0);" onclick="javascript:install_merge_loading('android');" id="down_load" class="btn-u btn-u-lg " style="padding:8px 24px;">
+
+                            下载 Android 版
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <footer>
+        <center><p>&copy; 2019 - 苏州云联智慧信息技术应用有限公司</p></center>
+    </footer>
+    <script>
+        var browser  = {
+            // 辨别移动终端类型
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            // 辨别移动终端的语言：zh-cn、en-us、ko-kr、ja-jp...
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+
+        var userAgentInfo = navigator.userAgent.toLowerCase();
+        var Agents = ["android", "iphone",
+                "symbianos", "windows phone",
+                "ipad", "ipod"];
+         var ly=document.referrer;  //返回导航到当前网页的超链接所在网页的URL
+
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) >= 0&&(ly==""||ly==null)) {
+                // 手机端访问
+               if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+                    $("#android").css("display", "none");
+                    $("#ios").show();//如果是ios系统 就显示APP Store 按钮
+
+                }
+                else if (browser.versions.android) {
+                    $("#ios").css("display", "none");
+                    $("#android").show();//如果是Android系统 就显示APP下载 按钮
+                }
+            }else{
+          
+            // pc端访问
+
+            }
+         }
+
+        // if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+        //     $("#android").css("display", "none");
+        //     $("#ios").show();//如果是ios系统 就显示APP Store 按钮
+
+        // }
+        // else if (browser.versions.android) {
+        //     $("#ios").css("display", "none");
+        //     $("#android").show();//如果是Android系统 就显示APP下载 按钮
+        // }
+
+        // //ios系统 判断是否微信扫描进入网页， 因为ios的微信 屏蔽了 链接进入ios应用商店，所以只能用浏览器打开
+        // $(".download").on("click", "a.ios", function () {
+        //    var ua = navigator.userAgent.toLowerCase();
+        //    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        //        $(".ios-tips").show();//显示提示用浏览器打开页面的透明浮动层
+        //    } else {
+        //        $(".ios-tips").hide();
+        //    }
+        // }
+
+
+        var iosstr = 'itms-services://?action=download-manifest&amp;url=https://raw.githubusercontent.com/xiaoyeZhang/WuxiAgriculture/master/WuxiAgriculture.plist';
+        var androidstr = 'http://222.92.89.98:8088/apk/wxnw/wxnw.apk';
+        var url = '';
+        function install_merge_loading(type) {
+            if (type == 'ios') {
+                if (!browser.versions.iPhone) {
+                    alert("请在手机上使用浏览器打开本页面，或者扫描下面的二维码，即可安装");
+                }
+                url = iosstr;
+            }
+            else if (type == 'android') {
+                url = androidstr;
+            }
+            var alink = document.createElement("a");
+            alink.href = url;
+            alink.click();
+        }
+    </script>
+</body>
+</html>
+
